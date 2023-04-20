@@ -1,0 +1,24 @@
+.profile__edit-button {
+  display: inline-block;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0 0 0 18px;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #fff;
+  font-size: 0;
+  line-height: 0;
+  background-image: url('../../../images/icon-pen.svg');
+  background-repeat: no-repeat;
+  background-size: 10px;
+  background-position: center center;
+}
+
+@media screen and (max-width: 480px) {
+  .profile__edit-button {
+    padding: 0 0 0 10px;
+    width: 18px;
+    height: 18px;
+    background-size: 7.5px;
+  }
+}
