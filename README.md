@@ -10,7 +10,7 @@
 * Positioning
 * Transition
 
-**Ссылка на GitHub Pages: **
+**Ссылка на GitHub Pages:** https://dariashamova.github.io/mesto-project-bootcamp/
 
 *Автор проекта: Дарья Шамова*
 
