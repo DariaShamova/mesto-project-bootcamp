@@ -17,71 +17,19 @@
         <div class="profile__container">
           <img src="images/avatar.jpg" alt="Аватар" class="profile__avatar">
           <div class="profile__info">
-            <h1 class="profile__name">Жак-Ив Кусто
-              <span class="profile__edit-button hover-icon"></span>
-            </h1>
+            <div class="profile__name-container">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button class="profile__edit-button hover-icon open-button" type="button" data-target="modal-profile"></button>
+            </div>
             <p class="profile__bio">Исследователь океана</p>
           </div>
         </div>
-        <button class="profile__add-button hover-icon"></button>
+        <button class="profile__add-button hover-icon open-button" type="button" data-target="modal-place"></button>
       </section>
 
       <section class="elements">
         <ul class="elements__list">
-          <li class="card">
-            <img src="images/photo-karachaevsk.jpg" alt="Фото храма в Карачаево-Черкесии" class="card__image">
-            <div class="card__description">
-              <h2 class="card__title">Карачаевск</h2>
-              <a href="#" class="card__like-button">
-                <img src="images/icon-heart.svg" alt="Иконка сердечка" class="card__icon">
-              </a>
-            </div>
-          </li>
-          <li class="card">
-            <img src="images/photo-elbrus.jpg" alt="Фото горы Эльбрус" class="card__image">
-            <div class="card__description">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <a href="#" class="card__like-button">
-                <img src="images/icon-heart.svg" alt="Иконка сердечка" class="card__icon">
-              </a>
-            </div>
-          </li>
-          <li class="card">
-            <img src="images/photo-dombai.jpg" alt="Фото гор в Домбае" class="card__image">
-            <div class="card__description">
-              <h2 class="card__title">Домбай</h2>
-              <a href="#" class="card__like-button">
-                <img src="images/icon-heart.svg" alt="Иконка сердечка" class="card__icon">
-              </a>
-            </div>
-          </li>
-          <li class="card">
-            <img src="images/photo-elbrus.jpg" alt="Фото горы Эльбрус" class="card__image">
-            <div class="card__description">
-              <h2 class="card__title">Гора Эльбрус</h2>
-              <a href="#" class="card__like-button">
-                <img src="images/icon-heart.svg" alt="Иконка сердечка" class="card__icon">
-              </a>
-            </div>
-          </li>
-          <li class="card">
-            <img src="images/photo-dombai.jpg" alt="Фото гор в Домбае" class="card__image">
-            <div class="card__description">
-              <h2 class="card__title">Домбай</h2>
-              <a href="#" class="card__like-button">
-                <img src="images/icon-heart.svg" alt="Иконка сердечка" class="card__icon">
-              </a>
-            </div>
-          </li>
-          <li class="card">
-            <img src="images/photo-karachaevsk.jpg" alt="Фото храма в Карачаево-Черкесии" class="card__image">
-            <div class="card__description">
-              <h2 class="card__title">Карачаево-Черкесия</h2>
-              <a href="#" class="card__like-button">
-                <img src="images/icon-heart.svg" alt="Иконка сердечка" class="card__icon">
-              </a>
-            </div>
-          </li>
+
         </ul>
       </section>
     </main>
@@ -90,17 +38,51 @@
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
 
-    <div class="popup">
+    <div class="popup" id="modal-place">
       <div class="popup__container">
-        <form action="#" class="form">
-          <h2 class="form__title">Редактировать профиль</h2>
-          <input class="form__field" type="text" value="Жак-Ив Кусто" placeholder="Имя и фамилия" required>
-          <input class="form__field" type="text" value="Исследователь океана" placeholder="Профессия" required>
-          <button type="submit" class="form__button hover-button">Сохранить</button>
+        <h2 class="popup__title">Новое место</h2>
+        <form action="#" class="form" name="form-place">
+          <input class="form__field" type="text" name="title" value="" placeholder="Название" required>
+          <input class="form__field" type="text" name="source" value="" placeholder="Ссылка на картинку" required>
+          <button type="submit" class="form__button hover-button">Создать</button>
         </form>
-        <img src="images/icon-close.svg" alt="Иконка закрытия" class="popup__close-icon hover-icon">
+        <button class="popup__close-icon hover-icon" type="button"></button>
       </div>
     </div>
+
+    <div class="popup" id="modal-profile">
+      <div class="popup__container">
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form action="#" class="form" name="form-profile">
+          <input class="form__field" type="text" name="full-name" value="Жак-Ив Кусто" placeholder="Имя и фамилия" required>
+          <input class="form__field" type="text" name="job-description" value="Исследователь океана" placeholder="Профессия" required>
+          <button type="submit" class="form__button hover-button">Сохранить</button>
+        </form>
+        <button class="popup__close-icon hover-icon" type="button"></button>
+      </div>
+    </div>
+
+    <div class="popup popup_dark" id="modal-picture">
+      <div class="popup__wrapper">
+        <img src="#" alt="" class="popup__image">
+        <h2 class="popup__name"></h2>
+        <button class="popup__close-icon hover-icon" type="button"></button>
+      </div>
+    </div>
+
   </div>
+
+  <template id="card-template">
+    <li class="card">
+      <img src="" alt="" class="card__image open-button" data-target="modal-picture">
+      <div class="card__description">
+        <h2 class="card__title"></h2>
+        <button class="card__like-button" type="button"></button>
+      </div>
+      <button class="card__trash hover-icon" type="button"></button>
+    </li>
+  </template>
+
+  <script src="script/script.js"></script>
 </body>
 </html>

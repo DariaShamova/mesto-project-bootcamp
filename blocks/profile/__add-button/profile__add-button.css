@@ -6,7 +6,10 @@
   box-sizing: border-box;
   border: 2px solid #FFFFFF;
   border-radius: 2px;
-  background: #000 url('../../../images/icon-plus.svg') no-repeat 22px;
+  background-color: transparent;
+  background-image: url('../../../images/icon-plus.svg');
+  background-size: 22px;
+  background-repeat: no-repeat;
   background-position: center center;
 }
 

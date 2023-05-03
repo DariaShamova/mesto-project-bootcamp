@@ -3,17 +3,14 @@
   width: 100%;
   min-height: 27px;
   height: 100%;
-  padding: 0 0 13px;
-  margin: 0 0 30px;
+  padding: 3px 5px 3px;
+  margin: 0 0 24px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   background-color: transparent;
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
   font-family: inherit;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 .form__field:last-of-type {
@@ -21,7 +18,7 @@
 }
 
 .form__field:focus {
-  outline-color: #fff6c5;
+  outline-color: #79d0ed;
 }
 
 .form__field::placeholder {

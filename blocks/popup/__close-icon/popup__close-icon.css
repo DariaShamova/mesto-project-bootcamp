@@ -5,6 +5,12 @@
   display: block;
   width: 32px;
   height: 32px;
+  background-image: url("../../../images/icon-close.svg");
+  background-color: transparent;
+  border: none;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 @media screen and (max-width: 580px) {
