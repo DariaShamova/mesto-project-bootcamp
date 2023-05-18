@@ -1,5 +1,5 @@
 // создаем новую карточку
-function createCard(item) {
+function createCard(item, handleClick) {
 
   const cardTemplate = document.querySelector('#card-template').content;
   // клонируем содержимое тега template
@@ -27,12 +27,7 @@ function createCard(item) {
   });
 
   // настраиваем поп-ап картинки
-  cardImage.addEventListener('click', () => {
-    popupImage.src = cardImage.src;
-    popupImage.alt = cardImage.alt;
-    popupName.textContent = cardImage.alt;
-    openPopup(picturePopup);
-  });
+  cardImage.addEventListener('click', () => handleClick(item.name, item.link));
 
   return cardElement;
 }

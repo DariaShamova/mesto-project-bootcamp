@@ -1,4 +1,9 @@
 import './styles/index.css'; // добавьте импорт главного файла стилей
+import { createCard } from "./components/card.js";
+import { openPopup, closePopup } from "./components/modal.js";
+import { config, enableValidation } from "./components/validate.js";
+import { initialCards } from "./components/initial-cards.js";
+
 
 const cardsList = document.querySelector('.elements__list');
 const profileBtn = document.querySelector('.profile__edit-button');
@@ -20,63 +25,34 @@ const titleInput = formElementPlace.elements['title'];
 const srcInput = formElementPlace.elements['source'];
 const closeBtns = document.querySelectorAll('.popup__close-icon');
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
-import { createCard } from "./components/card.js";
+
+const openPopupImage = (name, link) => {
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupName.textContent = name;
+  openPopup(picturePopup);
+}
 
 initialCards.forEach(function (item) {
-  const cardElement = createCard(item);
+  const cardElement = createCard(item, openPopupImage);
   cardsList.append(cardElement);
 })
 
-import { handlePlaceForm, handleProfileForm } from "./components/forms.js";
 
 formElementPlace.addEventListener('submit', handlePlaceForm);
 formElementProfile.addEventListener('submit', handleProfileForm);
 
-import { openPopup, closePopup } from "./components/modal.js";
 
 cardBtn.addEventListener('click', () => openPopup(cardPopup));
 profileBtn.addEventListener('click', () => openPopup(profilePopup));
+
 
 //Закрытие поп-апа
 //По клику на крестик
 closeBtns.forEach(closeBtn => {
   const popup = closeBtn.closest('.popup');
   closeBtn.addEventListener('click', () => closePopup(popup));
-});
-//По кнопкe ESC
-document.addEventListener('keydown', evt => {
-  if (evt.key === 'Escape') {
-    closePopup(cardPopup);
-    closePopup(profilePopup);
-    closePopup(picturePopup);
-  }
 });
 //По клику на overlay
 cardPopup.addEventListener('click', evt => {
@@ -95,9 +71,31 @@ picturePopup.addEventListener('click', evt => {
   }
 });
 
-import { showInputError, hideInputError, isValid, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation } from "./components/validate.js";
+// Форма профиля
+// Обработчик «отправки» формы
+function handleProfileForm(evt) {
+  evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
+  profileName.textContent = nameInput.value;
+  profileBio.textContent = jobInput.value;
+  closePopup(profilePopup);
+}
 
-enableValidation();
+// Форма места
+// Обработчик «отправки» формы
+function handlePlaceForm(evt) {
+  evt.preventDefault();
+  const item = {
+    name: titleInput.value,
+    link: srcInput.value
+  };
+  const cardElement = createCard(item, openPopupImage);
+  cardsList.prepend(cardElement);
+  closePopup(cardPopup);
+  formElementPlace.reset();
+}
+
+enableValidation(config);
+
 
 
 

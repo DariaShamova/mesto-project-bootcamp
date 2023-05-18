@@ -1,17 +1,26 @@
 //Валидация
+const config = {
+  formSelector: '.form',
+  inputSelector: '.form__field',
+  submitButtonSelector: '.form__button',
+  inactiveButtonClass: 'form__button_inactive',
+  hoverButtonClass: 'hover-button',
+  inputErrorClass: 'form__field_type_error',
+  errorClass: 'form__error_active'
+};
 // Функция, которая добавляет класс с ошибкой
 const showInputError = (formElement, inputElement, errorMessage) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.add('form__field_type_error');
+  inputElement.classList.add(config.inputErrorClass);
   errorElement.textContent = errorMessage;
-  errorElement.classList.add('form__error_active');
+  errorElement.classList.add(config.errorClass);
 };
 
 // Функция, которая удаляет класс с ошибкой
 const hideInputError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-  inputElement.classList.remove('form__field_type_error');
-  errorElement.classList.remove('form__error_active');
+  inputElement.classList.remove(config.inputErrorClass);
+  errorElement.classList.remove(config.errorClass);
   errorElement.textContent = '';
 };
 
@@ -37,18 +46,18 @@ const toggleButtonState = (inputList, buttonElement) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
-    buttonElement.classList.add('form__button_inactive');
-    buttonElement.classList.remove('hover-button');
+    buttonElement.classList.add(config.inactiveButtonClass);
+    buttonElement.classList.remove(config.hoverButtonClass);
   } else {
     // иначе сделай кнопку активной
-    buttonElement.classList.remove('form__button_inactive');
-    buttonElement.classList.add('hover-button');
+    buttonElement.classList.remove(config.inactiveButtonClass);
+    buttonElement.classList.add(config.hoverButtonClass);
   }
 };
 
 // Вызовем функцию isValid на каждый ввод символа
 const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.form__field'));
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
 
   const buttonElement = formElement.querySelector('.form__button');
 
@@ -64,7 +73,7 @@ const setEventListeners = (formElement) => {
 
 // Добавление обработчиков всем формам
 const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.form'));
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
 
   formList.forEach((formElement) => {
     formElement.addEventListener('submit', (evt) => {
@@ -74,4 +83,4 @@ const enableValidation = () => {
   });
 };
 
-export { showInputError, hideInputError, isValid, hasInvalidInput, toggleButtonState, setEventListeners, enableValidation }
+export { config, enableValidation }
