@@ -28,20 +28,6 @@
   color: #bcbcc4;
 }
 
-.form__field::-webkit-input-placeholder {
-  font-size: 14px;
-  font-family: inherit;
-  line-height: 17px;
-  color: #bcbcc4;
-}
-
-.form__field::-moz-placeholder {
-  font-size: 14px;
-  font-family: inherit;
-  line-height: 17px;
-  color: #bcbcc4;
-}
-
 @media screen and (max-width: 480px) {
   .form__field:last-of-type {
     margin-bottom: 45px;

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="pages/index.css">
+<!--  <link rel="stylesheet" href="../styles/index.css">-->
   <title>Проект: Место</title>
 </head>
 <body>
@@ -19,12 +19,12 @@
           <div class="profile__info">
             <div class="profile__name-container">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <button class="profile__edit-button hover-icon open-button" type="button" data-target="modal-profile"></button>
+              <button class="profile__edit-button hover-icon" type="button" data-target="modal-profile"></button>
             </div>
             <p class="profile__bio">Исследователь океана</p>
           </div>
         </div>
-        <button class="profile__add-button hover-icon open-button" type="button" data-target="modal-place"></button>
+        <button class="profile__add-button hover-icon" type="button" data-target="modal-place"></button>
       </section>
 
       <section class="elements">
@@ -42,8 +42,14 @@
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
         <form action="#" class="form" name="form-place">
-          <input class="form__field" type="text" name="title" value="" placeholder="Название" required>
-          <input class="form__field" type="text" name="source" value="" placeholder="Ссылка на картинку" required>
+          <label class="form__label">
+            <input class="form__field" type="text" name="title" id="title" value="" placeholder="Название" required minlength="2" maxlength="30">
+            <span class="form__error title-error"></span>
+          </label>
+          <label class="form__label">
+            <input class="form__field" type="url" name="source" id="source" value="" placeholder="Ссылка на картинку" required>
+            <span class="form__error source-error"></span>
+          </label>
           <button type="submit" class="form__button hover-button">Создать</button>
         </form>
         <button class="popup__close-icon hover-icon" type="button"></button>
@@ -54,8 +60,14 @@
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
         <form action="#" class="form" name="form-profile">
-          <input class="form__field" type="text" name="full-name" value="Жак-Ив Кусто" placeholder="Имя и фамилия" required>
-          <input class="form__field" type="text" name="job-description" value="Исследователь океана" placeholder="Профессия" required>
+          <label class="form__label">
+            <input class="form__field" type="text" name="full-name" id="name" value="Жак-Ив Кусто" placeholder="Имя и фамилия" required minlength="2" maxlength="40">
+            <span class="form__error name-error"></span>
+          </label>
+          <label class="form__label">
+            <input class="form__field" type="text" name="job-description" id="job" value="Исследователь океана" placeholder="О себе" required minlength="2" maxlength="200">
+            <span class="form__error job-error"></span>
+          </label>
           <button type="submit" class="form__button hover-button">Сохранить</button>
         </form>
         <button class="popup__close-icon hover-icon" type="button"></button>
@@ -74,7 +86,7 @@
 
   <template id="card-template">
     <li class="card">
-      <img src="" alt="" class="card__image open-button" data-target="modal-picture">
+      <img src="" alt="" class="card__image" data-target="modal-picture">
       <div class="card__description">
         <h2 class="card__title"></h2>
         <button class="card__like-button" type="button"></button>
@@ -83,6 +95,6 @@
     </li>
   </template>
 
-  <script src="script/script.js"></script>
+<!--  <components type="module" src="../components/components.js"></components>-->
 </body>
 </html>
