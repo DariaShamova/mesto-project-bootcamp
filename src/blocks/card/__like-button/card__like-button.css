@@ -17,8 +17,4 @@
   transition: all .2s linear;
 }
 
-.card__like-button:hover {
-  opacity: .5;
-  cursor: pointer;
-}
 
