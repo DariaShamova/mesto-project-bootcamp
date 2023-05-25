@@ -40,18 +40,25 @@ const hasInvalidInput = (inputList) => {
   });
 };
 
+const disableButton = (submitButton) => {
+  submitButton.classList.add(config.inactiveButtonClass);
+  submitButton.classList.remove(config.hoverButtonClass);
+}
+
+const activateButton = (submitButton) => {
+  submitButton.classList.remove(config.inactiveButtonClass);
+  submitButton.classList.add(config.hoverButtonClass);
+}
+
 // Функция принимает массив полей ввода
 // и элемент кнопки, состояние которой нужно менять
 const toggleButtonState = (inputList, buttonElement) => {
   // Если есть хотя бы один невалидный инпут
   if (hasInvalidInput(inputList)) {
     // сделай кнопку неактивной
-    buttonElement.classList.add(config.inactiveButtonClass);
-    buttonElement.classList.remove(config.hoverButtonClass);
+    disableButton(buttonElement)
   } else {
-    // иначе сделай кнопку активной
-    buttonElement.classList.remove(config.inactiveButtonClass);
-    buttonElement.classList.add(config.hoverButtonClass);
+    activateButton(buttonElement)
   }
 };
 
@@ -59,9 +66,13 @@ const toggleButtonState = (inputList, buttonElement) => {
 const setEventListeners = (formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(config.inputSelector));
 
-  const buttonElement = formElement.querySelector('.form__button');
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
 
   toggleButtonState(inputList, buttonElement);
+
+  formElement.addEventListener('reset', () => {
+    disableButton(buttonElement)
+  });
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {

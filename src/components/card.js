@@ -1,8 +1,8 @@
 import { userId } from "../index.js";
-import { deleteCard, putLike, deleteLike } from "./api.js";
+import { deleteCard } from "./api.js";
 
 // создаем новую карточку
-function createCard(item, handleClick) {
+function createCard(item, onImageHandler, onLikeHandler) {
 
   const cardTemplate = document.querySelector('#card-template').content;
   // клонируем содержимое тега template
@@ -20,65 +20,38 @@ function createCard(item, handleClick) {
   cardTitle.textContent = item.name;
   cardCounter.textContent = item.likes.length;
 
-
-
-  // настраиваем like
   if(item.likes.find(like => like._id === userId)) {
     like.classList.add('card__like-button_active');
-    like.addEventListener('click', function (evt) {
-      const eventTarget = evt.target;
-      eventTarget.classList.remove('card__like-button_active');
-
-      deleteLike(item._id)
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Ошибка: ${res.status}`);
-        })
-        .then((card) => {
-          cardCounter.textContent = card.likes.length;
-        })
-    });
-
-  } else {
-    like.addEventListener('click', function (evt) {
-      const eventTarget = evt.target;
-      eventTarget.classList.toggle('card__like-button_active');
-
-      putLike(item._id)
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Ошибка: ${res.status}`);
-        })
-        .then((card) => {
-          cardCounter.textContent = card.likes.length;
-        })
-    });
   }
 
+  // настраиваем like
+    like.addEventListener('click', function (evt) {
+      onLikeHandler({
+        evt,
+        like,
+        item,
+        cardCounter
+      })
+
+    });
 
   // настраиваем удаление
   if(item.owner._id !== userId) {
     trash.remove();
   } else {
     trash.addEventListener('click', () => {
-      cardElement.remove();
       deleteCard(item._id)
         .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          return Promise.reject(`Ошибка: ${res.status}`);
+          cardElement.remove()
+        })
+        .catch((err) => {
+          console.log(err);
         });
     });
   }
 
-
   // настраиваем поп-ап картинки
-  cardImage.addEventListener('click', () => handleClick(item.name, item.link));
+  cardImage.addEventListener('click', () => onImageHandler(item.name, item.link));
 
   return cardElement;
 }

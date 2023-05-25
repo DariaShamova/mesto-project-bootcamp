@@ -1,3 +1,5 @@
+import { checkResponse } from "./utils.js";
+
 const settings = {
   baseUrl: 'https://nomoreparties.co/v1/wbf-cohort-8',
   headers: {
@@ -6,31 +8,25 @@ const settings = {
   }
 }
 
+function request(url, options) {
+  return fetch(`${settings.baseUrl}/${url}`, options)
+    .then(checkResponse)
+}
+
 export const getUserInfo = () => {
-  return fetch(`${settings.baseUrl}/users/me`, {
+  return request(`users/me`, {
     headers: settings.headers
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
-};
+}
+
 export const getInitialCards = () => {
-  return fetch(`${settings.baseUrl}/cards`, {
+  return request(`cards`, {
     headers: settings.headers
   })
-    .then(res => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    })
 }
 
 export const updateProfile = (profileName, profileAbout) => {
-  return fetch(`${settings.baseUrl}/users/me`, {
+  return request(`users/me`, {
     method: 'PATCH',
     headers: settings.headers,
     body: JSON.stringify({
@@ -41,7 +37,7 @@ export const updateProfile = (profileName, profileAbout) => {
 }
 
 export const updateAvatar = (avatarSrc) => {
-  return fetch(`${settings.baseUrl}/users/me/avatar`, {
+  return request(`users/me/avatar`, {
     method: 'PATCH',
     headers: settings.headers,
     body: JSON.stringify({
@@ -51,7 +47,7 @@ export const updateAvatar = (avatarSrc) => {
 }
 
 export const addNewCard = (cardName, cardSource) => {
-  return fetch(`${settings.baseUrl}/cards`, {
+  return request(`cards`, {
     method: 'POST',
     headers: settings.headers,
     body: JSON.stringify({
@@ -62,25 +58,22 @@ export const addNewCard = (cardName, cardSource) => {
 }
 
 export const deleteCard = (cardId) => {
-  return fetch(`${settings.baseUrl}/cards/${cardId}`, {
+  return request(`cards/${cardId}`, {
     method: 'DELETE',
     headers: settings.headers,
   })
 }
 
 export const putLike = (cardId) => {
-  return fetch(`${settings.baseUrl}/cards/likes/${cardId}`, {
+  return request(`cards/likes/${cardId}`, {
     method: 'PUT',
     headers: settings.headers,
   })
 }
 
 export const deleteLike = (cardId) => {
-  return fetch(`${settings.baseUrl}/cards/likes/${cardId}`, {
+  return request(`cards/likes/${cardId}`, {
     method: 'DELETE',
     headers: settings.headers,
   })
 }
-
-
-
