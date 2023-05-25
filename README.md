@@ -9,6 +9,9 @@
 * Grid
 * Positioning
 * Transition
+* Webpack
+* JavaScript modules
+* API
 
 **Ссылка на GitHub Pages:** https://dariashamova.github.io/mesto-project-bootcamp/
 
