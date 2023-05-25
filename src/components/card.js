@@ -2,7 +2,7 @@ import { userId } from "../index.js";
 import { deleteCard } from "./api.js";
 
 // создаем новую карточку
-function createCard(item, onImageHandler, onLikeHandler) {
+function createCard(item, onImageHandler, onLikeHandler, onDeleteHandler) {
 
   const cardTemplate = document.querySelector('#card-template').content;
   // клонируем содержимое тега template
@@ -32,22 +32,17 @@ function createCard(item, onImageHandler, onLikeHandler) {
         item,
         cardCounter
       })
-
     });
 
   // настраиваем удаление
   if(item.owner._id !== userId) {
     trash.remove();
   } else {
-    trash.addEventListener('click', () => {
-      deleteCard(item._id)
-        .then(res => {
-          cardElement.remove()
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    });
+    trash.addEventListener('click', (evt) => {
+      onDeleteHandler ({
+        item,
+        cardElement })
+    })
   }
 
   // настраиваем поп-ап картинки

@@ -60,10 +60,7 @@ function onDeleteHandler ({ item, cardElement }) {
     });
 }
 
-function onLikeHandler({
-  like,
-  item,
-  cardCounter}) {
+function onLikeHandler({like, item, cardCounter}) {
   if(like.className.includes('card__like-button_active')) {
     deleteLike(item._id)
       .then((card) => {
@@ -93,7 +90,7 @@ Promise.all([getUserInfo(), getInitialCards()])
     userId = userData._id;
 
     cards.forEach(function (item) { // отрисовка карточек
-      const cardElement = createCard(item, openPopupImage, onLikeHandler);
+      const cardElement = createCard(item, openPopupImage, onLikeHandler, onDeleteHandler);
       cardsList.append(cardElement);
     })
   })
@@ -167,7 +164,7 @@ function handlePlaceForm(evt) {
   function makeRequest() {
     return addNewCard(item.name, item.link)
       .then((item) => {
-        const cardElement = createCard(item, openPopupImage, onLikeHandler);
+        const cardElement = createCard(item, openPopupImage, onLikeHandler, onDeleteHandler);
         cardsList.prepend(cardElement);
       })
   }
